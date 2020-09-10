@@ -1,0 +1,229 @@
+Assignment 2
+------------------------------------------------------------------------------------------------
+1. Write a script to create 10 directories, say a1,a2,...,a10
+-->for (( i=1 ; i<=10 ; i++ ))
+	do
+	mkdir "A$i"
+	done
+Report error if a directory/file exists with the same name.
+-->for (( i=1 ; i<=10 ; i++ ))
+	do
+	mkdir "A$i"
+	if [ " d" ]
+	done
+
+2. Write a menu based script to perform following string operations
+a) To find length of a string
+c) Copying string
+d) Concatenation of strings
+e) Compare two strings
+	echo "Enter string 1:"
+	read str1
+	echo "Enter string 2:"
+	read str2
+
+	length=${#str1}
+	echo "length :"
+	echo ${length}
+	strcpy="$str1"
+	echo "Coping str:$strcpy"
+
+	echo "concatination: $str1 $str2"
+
+
+	if [ "$str1" = "$str2" ];then
+        	echo "string are equal"
+	else
+        	echo "string are diffferent"
+	fi
+
+
+f) Reversing a string
+--> rev $str1 | rev
+
+3.Write a shell script to rename all files in the current directory with numeric continuous value
+(Warning: Do this in a personal folder. Don't use Home directory) 
+-->	for (( i=1 ; i<=10 ; i++ ))
+	do
+	mv "A$i" "B$i"
+	done
+
+	
+4. Write a script that print environment variable(Print $HOME,$PATH,$SHELL,$HISTORY,$LOGNAME,$TERM)
+-->	echo "Directory Path:"$HOME"
+	echo "Path Command:"$PATH"
+	echo "SHELL command : $SHELL"
+	echo "History command : $HISTORY"
+	echo "Logname command : $LOGNAME"
+	echo "Term command : $TERM"	
+5. Write a shell script to print all files permissions in current directory(Not name or other details)(Use cut commands)
+-->	ls -la
+	ls -la | cut -b 1-10
+6. Write a shell script to print all files permissions and name of file
+-->	ls -la
+7.Write a shell script to print all files name and size greater than 5K
+-->echo "command : -type f -name '*.sh' -size +5k -ls"
+	find -type f -name "*.sh" -size +0k -ls
+
+
+
+
+
+1. Write a script To check given year is leap or not.
+-->echo enter year
+	read year
+	if [ $((year%4)) -eq 0 ]; then
+        	if [ $((year%100)) -eq 0 ]; then
+                	if [ $((year%400)) -eq 0 ]; then
+                        	echo "$year is a Leap year"
+                	else
+                        	echo "$yeaar  is not a Leap year"
+                	fi
+        	else
+                	echo "$year not a Leap year"
+        	fi
+	else
+        	echo "Not a leap Year"
+	fi
+
+2. Write a script to print day of the week using
+a) elif	
+-->	echo "Enter day in[1-7]"
+	read daynum
+	
+	if [ $daynum -eq 1 ]; then
+        	echo "Monday"
+	elif [ $daynum -eq 2 ]; then
+        	echo "Tuesday"
+	elif [ $daynum -eq 3 ]; then
+        	echo "Wedsday"
+	elif [ $daynum -eq 4 ]; then
+        	echo "Thursday"
+	elif [ $daynum -eq 5 ]; then
+        	echo "Friday"
+	elif [ $daynum -eq 6 ]; then
+        	echo "Saturday"
+	elif [ $daynum -eq 7 ]; then
+        	echo "Sunday"
+	else
+        	echo "Please Enter Number between [1-7]"
+	fi
+
+b) case
+-->echo Enter day in [1-7]
+	read day
+	case $day in
+        	1)echo "Monday";;
+        	2)echo Tuesday;;
+        	3)echo Wednesday;;
+        	4)echo Thursday;;
+        	5)echo Friday;;
+        	6)echo Saturday;;
+        	7)echo Sunday;;
+        	*)echo "Please enter number btween [1-7]"
+	esac
+ 
+3. a) Write a script to find biggest of three no.s
+-->	echo Enter 3 Numbers	
+	read a
+	read 
+	read c
+
+	if [ $a -gt $b ]; then
+        	if [ $a -gt $c ]; then
+                	echo "A is greater"
+        	else
+                	echo "C is greater"
+        	fi
+	elif [ $b -gt $c ]; then
+        	echo "B is greater"
+	else
+        	echo "C is greater"
+	fi
+
+b) To find avg of 3 no.s, read no.s from keyboard
+-->	echo Enter 3 number
+	read a
+	read b
+	read c
+
+	x=$((a+b+c))
+
+	Avg=$(( x / 3 ))
+	echo $Avg
+           
+4. Write a program to check wahether given no.is even or odd
+->	echo Enter number
+	read x
+	if (($x%2 == 0)); then
+	        echo "Number is odd"
+	else
+	        echo "Number is Even"
+	fi
+  
+5. Write a program to print calendar of current month in next year,previous years.
+	For eg:-sep 2014,sep 2012 if current month is sep 2013	
+-->
+6. Write a program to find sum and product of two no.s using 
+	a) let 
+	b)expr
+	c)bc	
+-->	echo Using let command Addition
+
+	let var1=5
+	let var2=5
+	let var3=var1+var2
+	echo $var3
+
+	echo Using Let Multiplication
+
+	let var4=var1*var2
+	echo $var4
+
+	echo Using expr addition
+	var5=`expr $var1 + $var2`
+	echo $var5
+
+	echo using expr Multiplication
+	var6=`expr $var1 \* $var2`
+	echo $var6
+
+	echo using bc addition
+	echo $var1 + $var2 | bc -l
+
+	echo using bc mulitplication
+	echo $var1 \* $var2 | bc
+
+7. Write a script to generate Fibonacci series.
+-->	echo enter limit
+	read num
+	f1=0
+	f2=1
+	echo "Fibonacci Series of $num term is :"
+	for((i=0;i<num;i++))
+	do
+        	echo $f1
+        	sum=$((f1+f2))
+        	f1=$f2
+        	f2=$sum
+	done
+
+8. Write a shell script to reverse the single strings. 
+-->	str="Sushant"
+	echo $str | rev
+
+9.Write a shell script to reverse the list of strings and reverse each string further in the list.
+-->
+
+10. Write a shell script to print the reverse of an input number.
+-->	num=123456789
+	echo $num | rev
+
+
+
+1.Write a shell script to validate password strength. Here are a few assumptions for the password string.
+Length  – minimum of 8 characters.
+Contain both alphabet and number.
+Include both the small and capital case letters.
+If the password doesn’t comply with any of the above conditions, then the script should report it as a <Weak Password>.
+
