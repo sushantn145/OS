@@ -65,6 +65,18 @@ f) Reversing a string
 -->echo "command : -type f -name '*.sh' -size +5k -ls"
 	find -type f -name "*.sh" -size +0k -ls
 
+-->
+	for i in *
+	do
+		if [ -e $i ]
+		then
+			file=`ls -l $i | awk '{print $5}'`
+			if (( $file > 5000 ))
+			then
+				ls -l $i
+			fi 
+		fi
+	done
 
 
 
@@ -164,6 +176,7 @@ b) To find avg of 3 no.s, read no.s from keyboard
 5. Write a program to print calendar of current month in next year,previous years.
 	For eg:-sep 2014,sep 2012 if current month is sep 2013	
 -->
+
 6. Write a program to find sum and product of two no.s using 
 	a) let 
 	b)expr
@@ -207,13 +220,41 @@ b) To find avg of 3 no.s, read no.s from keyboard
         	f1=$f2
         	f2=$sum
 	done
-
+	
 8. Write a shell script to reverse the single strings. 
 -->	str="Sushant"
 	echo $str | rev
 
 9.Write a shell script to reverse the list of strings and reverse each string further in the list.
--->
+-->	echo 'Enter array of Strings : '
+	read -a arr
+
+	min=0
+	max=`expr ${#arr[@]} - 1`
+	x=$max
+	while (( $min <= $max ))
+	do
+		newArr[$min]=${arr[$max]}
+		newArr[$max]=${arr[$min]}
+		(( min++ ))
+		(( max-- ))
+	done
+
+	max=$x
+
+	for (( i=0; i<=max; i++ ))
+	do
+		rev=""
+		str=${newArr[$i]}
+		let "len=${#str} -1"
+		for (( j=$len; j>=0; j-- ))
+		do
+			rev="$rev${str:$j:1}"
+		done
+		newArr[$i]=$rev
+	done
+
+	echo ${newArr[@]}
 
 10. Write a shell script to print the reverse of an input number.
 -->	num=123456789
@@ -226,4 +267,31 @@ Length  – minimum of 8 characters.
 Contain both alphabet and number.
 Include both the small and capital case letters.
 If the password doesn’t comply with any of the above conditions, then the script should report it as a <Weak Password>.
+
+-->	echo "enter the password"
+ 	read password
+ 	len="${#password}" 
+  	if  [ $len -ge 8 ]  
+   	then 
+        echo "$password" | grep -q [0-9] 
+    		if [ $? -eq 0 ]  
+        	then
+             	echo "$password" | grep -q [A-Z] 
+        		if [ $? -eq 0 ]  
+            		then
+                 	echo "$password" | grep -q [a-z]
+            			if [ $? -eq 0 ]  
+                		then 
+                    		echo "$password" | grep -q [$,@,\#,%]
+                			if [ $? -eq 0 ]  
+                    			then echo "Strong password"
+                			else echo "weak password include special chars"
+                			fi 
+            			else echo "weak password include lower case char" 
+            			fi
+        		else echo "weak password include capital char" 
+        		fi 
+    		else echo "please include"
+    		fi
+	fi
 
