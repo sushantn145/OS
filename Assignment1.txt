@@ -56,6 +56,8 @@ Q3. A) Create five files file1.txt , file2.txt ,file3.txt file4.txt and
 	B)Create file.txt using cat and edit that using nano editor.
 	-->	cat >file.txt
 		nano file1.txt
+		ctrl o
+		ctrl x
 	c)Create 5 empty files using touch command
 	-->	touch f1.txt f2.txt f3.txt f4.txt f5.txt
 	D)Remove previously created directory a , b and c.
@@ -63,12 +65,13 @@ Q3. A) Create five files file1.txt , file2.txt ,file3.txt file4.txt and
 		rm dir2
 		rm dir3
 Q4. Create a file with some content using vi editor
+	vi file1.txt
 	a) Display the file using cat command
 	-->	cat file1.txt
 	b) Display line numbers along with content
 	-->	cat file1.txt -n
 	c) Display the file in reverse order using tac
-	--> 	ls -r
+	--> 	tac file1.txt | rev
 	d) Combine multiple files using cat command
 	-->	cat f1.txt f2.txt f3.txt f4.txt > f5.txt
 
@@ -79,6 +82,8 @@ Q5. Create Random some files and sub directories.
 	b) sort the files in ascending, descending order
 	-->	sort file1.txt 
 		sort file1.txt -r
+		ls -1  (sort by name asceding order)
+		ls -1 -r  (sort by name descending order)
 	c) Create some hidden files and sub directories and display them using “ls -a”
 	--> 	sub-directory --> mkdir .a1
 		hidden file -->	cat >.a2 
@@ -97,9 +102,9 @@ Q1. Create directory of your name and then create 4 files inside it named
 	a.txt, b.txt, c.txt and d.sh. And change the directory permission to
 	only user and also files permission to only user such that
 		a)user can read and write the file a.txt and b.txt
-		-->chmod =rw- a.txt b.txt
+		-->chmod 600 a.txt b.txt
 		b)user can write the file c.txt
-		--> chmod +w+ c.txt  
+		--> chmod 200 c.txt  
 		c)user can exectuable the file d.sh. Make
 			Contents of file d.sh:
 			#/bin/sh
@@ -108,18 +113,22 @@ Q1. Create directory of your name and then create 4 files inside it named
 			#/bin/sh
 			ls -lh
 			?????????
+		--> 	chmod 100 d.sh
+			vi d.sh
+			bash vi.sh
+
 Q2. Change the permission of the previous directory to executable only.
 	Analyze the output.
--->	chmod +x c.txt
+-->	chmod 111 c.txt
 Q3. Change the permission of the previous directory to read only.
 	Analyze the output.
--->	chmod +r c.txt
+-->	chmod 444 c.txt
 Q4. Use echo to list the all files of your home directory.
 -->	echo *
 Q5. Use echo to list the all files of /etc/ directory
--->	???
+-->	echo */*
 Q6. Use echo to list the all files of /etc/ directory with extension name .conf
--->	??
+-->	echo etc/directory/*.conf
 Q7. Use echo to append your name to a.txt
 -->	 echo sushant >>a.txt
 ==================================================================================
@@ -127,12 +136,15 @@ Q7. Use echo to append your name to a.txt
 Note:Many operation might not work.Analyze them
 1.Create Three level nested directory a,b and c
 --> 	mkdir a
+	cd a
 	mkdir b
+	cd b
 	mkdir c
+
 a)Create at least one hidden file in each directory
--->	cat >.a.txt
-	cat >.b.txt
-	cat >.c.txt
+-->	cat > .h1.txt 
+	cat > .h2.txt
+	cat > .h3.txt
 b)Create at least one normal text file in each directory
 -->	cat >A.txt
 	cat >B.txt
@@ -146,7 +158,7 @@ d)Copy file inside a into b
 -->	 cp -R b a
 
 2.	Change the third level directory c permission to read only
--->	chmod =r-- c 
+-->	chmod 444 c
 
 3.	Try copying third level c directory to outside of a
 -->	cp -R c a
@@ -158,40 +170,39 @@ d)Copy file inside a into b
 	mkdir data
 
 5.	Change the permission of b to read and write only
--->	chmod =rw- b 
+-->	chmod 644 b 
 
 6.	Create directory “data2”  inside b
--->	cd b
-	-bash: cd: b: Permission denied
+-->	 mkdir a/b/data2
 	
 7.	Create data.txt file inside b
--->	cd b
-	-bash: cd: b: Permission denied
+-->	 mkdir a/b/data2.txt
 
 8.	Rename the second level directory c to copied_dir
--->	
+-->	>>mv a/b/c copied_dir
 9.	Change permission of copied_dir to only executable
--->	
+-->	chmod 100 b/copid_dir
 10.	Try ls on copied_dir
--->
+-->	-bash: cd: copied_dir: Permission denied
 11.	Try moving copied_dir to outside of a
--->	
+-->	-bash: cd: copied_dir: Permission denied
 12.	Try moving data directory outside of a
--->
+-->	-bash: cd: copied_dir: Permission denied
 13.	Now change the owner of the directory a to root
 -->	
 14.	Change permission of a to read write and executable to only user
--->	
+-->	chmod u+rwx a
 15.	Try creating directory sample inside a
--->	
+-->	mkdir a/sample
 16.	Create directory x outside a
--->	
+-->	mkdir ../x
 17.	Try moving x inside a
--->	
+-->	mv x ./a
 18.	Create directory movies
--->	
+-->	mkdir movies
 19.	Change group of movies to sudo
--->	
+-->	sudo usermod -aG sudo newuser
+
 20.	Change group of movies to avahi
 -->	
 21.	Try changing permission after changing ownership to root
